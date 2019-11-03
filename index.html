@@ -4,15 +4,179 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style>
-      h1 {
-        text-align: center;
-        color: blue;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/8660658c92.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>weather app</title>
   </head>
+
+  <style>
+    .weatherapp {
+      border: 5px solid #dadde1;
+      margin: 30px auto;
+      max-width: 1000px;
+      padding: 15px;
+      border-radius: 10px;
+      font-family: "Raleway", sans-serif;
+      background: rgb(253, 251, 251);
+    }
+
+    .icon {
+      font-size: 60px;
+      color: rgba(34, 138, 94, 0.3);
+    }
+
+    .icons {
+      font-size: 15px;
+      color: rgba(34, 138, 94, 0.3);
+      position: relative;
+      left: 10px;
+    }
+
+    .forcast {
+      border-radius: 30px;
+      border: 3px solid #e0e0ec;
+      box-shadow: 6px 5px 1px 1px rgba(34, 138, 94, 0.3);
+      line-height: 30px;
+      margin: 10px;
+      font-size: 15px;
+    }
+
+    .weatherapp li {
+      list-style: none;
+    }
+
+    .forcasttext {
+      position: relative;
+      left: 15px;
+    }
+
+    .city-name {
+      font-size: 20px;
+    }
+
+    .h2 {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+      background-color: rgba(34, 138, 94, 0.3);
+      border: none;
+      color: white;
+      padding: 4px 8px;
+      text-decoration: none;
+      margin: 4px 2px;
+    }
+  </style>
+
   <body>
-    <h1>Hello Git</h1>
+    <div class="container">
+      <div class="weatherapp">
+        <div class="row">
+          <div class="col-6">
+            <h1 id="city-name">Berlin</h1>
+            <h2>7. October 2019</h2>
+
+            <ul class="today">
+              <span class="icon"> <i class="fas fa-cloud-sun"></i></span>
+
+              <li><span class="temp">16°C</span></li>
+            </ul>
+            <form id="search-from">
+              <input
+                type="text"
+                placeholder="Enter a city"
+                autocomplete="off"
+                autofocus="on"
+                id="search-input"
+              />
+              <input type="submit" value="Search" />
+            </form>
+          </div>
+          <div class="col-6">
+            <ul>
+              <li class="forcast">
+                <span class="icons"> <i class="fas fa-cloud"></i> </span>
+                <span class="forcasttext">18°C Monday</span>
+              </li>
+              <li class="forcast">
+                <span class="icons"><i class="fas fa-sun"></i> </span>
+                <span class="forcasttext">22°C Tuesday</span>
+              </li>
+              <li class="forcast">
+                <span class="icons"><i class="fas fa-cloud-sun"></i> </span>
+                <span class="forcasttext"> 16°C Wednesday</span>
+              </li>
+              <li class="forcast">
+                <span class="icons"><i class="fas fa-cloud-rain"></i> </span>
+                <span class="forcasttext"> 14°C Thursday</span>
+              </li>
+              <li class="forcast">
+                <span class="icons"><i class="fas fa-cloud-sun-rain"></i></span>
+                <span class="forcasttext"> 13°C Friday</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let h2 = document.querySelector("h2");
+      let now = new Date();
+      let date = now.getDate();
+      let hour = now.getHours();
+      let minutes = now.getMinutes();
+      let year = now.getFullYear();
+
+      let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      let day = days[now.getDay()];
+
+      let months = [
+        "Jan",
+        "Feb",
+        "March",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+      let month = months[now.getMonth()];
+
+      h2.innerHTML = `${day} -  ${date} ${month} - ${year}, ${hour}:${minutes} `;
+
+      function search(event) {
+        event.preventDefault();
+        let searchInput = document.querySelector("#search-input");
+        if (searchInput.value.length) {
+          let city = document.querySelector("#city-name");
+          city.innerHTML = searchInput.value;
+        }
+      }
+
+      let searchForm = document.querySelector("#search-form");
+      searchForm.addEventListener("submit", search);
+    </script>
   </body>
 </html>
